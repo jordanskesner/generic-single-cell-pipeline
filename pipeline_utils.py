@@ -29,9 +29,13 @@ def download_genome(genome_info, output_dir):
             pass
         print(f"Saving logfile to: {log_path}")
 
-        ## fasta url
-        fasta_url = urls["fasta_url"]
+        ## urls
+        genome_url = urls["genome_url"]
         gtf_url = urls["gtf_url"]
+        cdna_url = urls["cdna_url"]
+        cds_url = urls["cds_url"]
+        ncrna_url = urls["ncrna_url"]
+        pep_url = urls["pep_url"]
 
         ## redirect stdout for logging purposes
         with open(log_path, "w") as f:
@@ -39,28 +43,77 @@ def download_genome(genome_info, output_dir):
 
                 ##
                 print(f"Genome: {genome}")
-                print(f"Fasta url: {fasta_url}")
+                print(f"Genome url: {genome_url}")
                 print(f"gtf url: {gtf_url}")
+                print(f"cdna url: {cdna_url}")
+                print(f"cds url: {cds_url}")
+                print(f"ncrna url: {ncrna_url}")
+                print(f"pep url: {pep_url}")
+                
+                ## timestamp
+                now = datetime.now()
+                timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
+                print("Operation performed at:", timestamp)
                 
                 ## construct filepaths
                 ## NOTE: backslash defaults with os.path.join on windows. replace with forward slash
-                fasta_path = os.path.join(genome_dir, os.path.basename(urls["fasta_url"])).replace("\\", "/")
+                genome_path = os.path.join(genome_dir, os.path.basename(urls["genome_url"])).replace("\\", "/")
                 gtf_path = os.path.join(genome_dir, os.path.basename(urls["gtf_url"])).replace("\\", "/")
+                cdna_path = os.path.join(genome_dir, os.path.basename(urls["cdna_url"])).replace("\\", "/")
+                cds_path = os.path.join(genome_dir, os.path.basename(urls["cds_url"])).replace("\\", "/")
+                ncrna_path = os.path.join(genome_dir, os.path.basename(urls["ncrna_url"])).replace("\\", "/")
+                pep_path = os.path.join(genome_dir, os.path.basename(urls["pep_url"])).replace("\\", "/")
         
                 # print
-                print(f"Saving fasta file to: {fasta_path}")
+                print(f"Saving genome file to: {genome_path}")
                 print(f"Saving gtf file to: {gtf_path}")
+                print(f"Saving cdna file to: {cdna_path}")
+                print(f"Saving cds file to: {cds_path}")
+                print(f"Saving ncrna file to: {ncrna_path}")
+                print(f"Saving pep file to: {pep_path}")
         
-                ## download fasta file
+                ## download genome file ##
                 try:
-                    urllib.request.urlretrieve(fasta_url, fasta_path)
+                    urllib.request.urlretrieve(genome_url, genome_path)
                 except Exception as e:
-                    print(f"Failed to download {fasta_url}: {e}")
+                    print(f"Failed to download {genome_url}: {e}")
 
-                ## download gtf file
+                ## download gtf file ##
                 try:
                     urllib.request.urlretrieve(gtf_url, gtf_path)
                 except Exception as e:
                     print(f"Failed to download {gtf_url}: {e}")
+                    
+                ## download cdna file ##
+                try:
+                    urllib.request.urlretrieve(cdna_url, cdna_path)
+                except Exception as e:
+                    print(f"Failed to download {cdna_url}: {e}")
+                    
+                    
+                ## download gtf file
+                try:
+                    urllib.request.urlretrieve(cds_url, cds_path)
+                except Exception as e:
+                    print(f"Failed to download {cds_url}: {e}")
+                    
+                ## download gtf file
+                try:
+                    urllib.request.urlretrieve(ncrna_url, ncrna_path)
+                except Exception as e:
+                    print(f"Failed to download {ncrna_url}: {e}")
+                    
+                ## download gtf file
+                try:
+                    urllib.request.urlretrieve(pep_url, pep_path)
+                except Exception as e:
+                    print(f"Failed to download {pep_url}: {e}")
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
 
