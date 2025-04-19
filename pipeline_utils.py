@@ -74,38 +74,67 @@ def download_genome(genome_info, output_dir):
         
                 ## download genome file ##
                 try:
-                    urllib.request.urlretrieve(genome_url, genome_path)
+                    # check if file exists, if not, create it
+                    if not genome_path.is_file():
+                        print(f"File '{genome_path}' does not exist. Downloading...")
+                        urllib.request.urlretrieve(genome_url, genome_path)
+                    else:
+                        print(f"File '{genome_path}' already exists. Skipping")
                 except Exception as e:
                     print(f"Failed to download {genome_url}: {e}")
 
                 ## download gtf file ##
                 try:
-                    urllib.request.urlretrieve(gtf_url, gtf_path)
+                    # check if file exists, if not, create it
+                    if not gtf_path.is_file():
+                        print(f"File '{gtf_path}' does not exist. Downloading...")
+                        urllib.request.urlretrieve(gtf_url, gtf_path)
+                    else:
+                        print(f"File '{gtf_path}' already exists. Skipping")
                 except Exception as e:
                     print(f"Failed to download {gtf_url}: {e}")
                     
                 ## download cdna file ##
                 try:
-                    urllib.request.urlretrieve(cdna_url, cdna_path)
+                    # check if file exists, if not, create it
+                    if not cdna_path.is_file():
+                        print(f"File '{cdna_path}' does not exist. Downloading...")
+                        urllib.request.urlretrieve(cdna_url, cdna_path)
+                    else:
+                        print(f"File '{cdna_path}' already exists. Skipping")
                 except Exception as e:
                     print(f"Failed to download {cdna_url}: {e}")
                     
-                    
-                ## download gtf file
+                ## download cds file ##
                 try:
-                    urllib.request.urlretrieve(cds_url, cds_path)
+                    # check if file exists, if not, create it
+                    if not cds_path.is_file():
+                        print(f"File '{cds_path}' does not exist. Downloading...")
+                        urllib.request.urlretrieve(cds_url, cds_path)
+                    else:
+                        print(f"File '{cds_path}' already exists. Skipping")
                 except Exception as e:
-                    print(f"Failed to download {cds_url}: {e}")
+                    print(f"Failed to download {cds_path}: {e}")
                     
-                ## download gtf file
+                ## download ncrna file ##
                 try:
-                    urllib.request.urlretrieve(ncrna_url, ncrna_path)
+                    # check if file exists, if not, create it
+                    if not ncrna_path.is_file():
+                        print(f"File '{ncrna_path}' does not exist. Downloading...")
+                        urllib.request.urlretrieve(ncrna_url, ncrna_path)
+                    else:
+                        print(f"File '{ncrna_path}' already exists. Skipping")
                 except Exception as e:
                     print(f"Failed to download {ncrna_url}: {e}")
                     
-                ## download gtf file
+                ## download pep file ##
                 try:
-                    urllib.request.urlretrieve(pep_url, pep_path)
+                    # check if file exists, if not, create it
+                    if not pep_path.is_file():
+                        print(f"File '{pep_path}' does not exist. Downloading...")
+                        urllib.request.urlretrieve(pep_url, pep_path)
+                    else:
+                        print(f"File '{pep_path}' already exists. Skipping")
                 except Exception as e:
                     print(f"Failed to download {pep_url}: {e}")
                     
