@@ -1,0 +1,50 @@
+## Major issue #1
+installed salmon in conda env, has an issue finding a library called boost of the correct version
+- installing with -c conda forge did not fix
+- updating to ubuntu 20 from ubuntu 18 did not fix
+- attempting to performa a manual install from github instad
+
+sudo apt update && sudo apt install -y \
+    git cmake g++ zlib1g-dev libbz2-dev \
+    liblzma-dev libboost-all-dev libjemalloc-dev \
+    libtbb-dev libcurl4-openssl-dev
+
+mkdir salmon
+git clone --recurse-submodules https://github.com/COMBINE-lab/salmon.git
+cd salmon
+mkdir build
+cd build
+## NOTE: make sure wget, curl, and unzip are installed or will get an error with fetchPufferfish.sh script
+cmake ..
+make -j$(nproc)
+-did not work
+
+
+trying to uninstall cmake version 4.0 and manually reinstall 3.5.2
+(required OpenGl: sudo apt install libgl1-mesa-dev)
+(also openssl libssl-dev)
+
+--error in libstadenio
+sudo apt install zlib1g-dev libcurl4-openssl-dev libssl-dev \
+                 libbz2-dev build-essential git
+
+
+cd cmake-3.5.2
+wget https://github.com/Kitware/CMake/releases/download/v3.5.2/cmake-3.5.2.tar.gz
+tar -xvzf cmake-3.5.2.tar.gz
+cd cmake-3.5.2
+./bootstrap --prefix=$HOME/cmake-3.5.2
+make -j$(nproc)
+make install
+echo 'export PATH=home/ubuntu1/cmake-3.5.2/cmake-3.5.2/bin/:$PATH' >> ~/.bashrc
+source ~/.bashrc
+cmake --version (to check correct version)
+- now try to build salmon again
+- did not work with version 3.5.2. installing 3.27 and try again
+
+- in the end, build did not work either. used precompiled binaries to make it work
+
+
+#### cellranger
+after install, cellranger sitecheck failed with "cpu does not support avx instruction." may need to enable on the virtual machine
+
