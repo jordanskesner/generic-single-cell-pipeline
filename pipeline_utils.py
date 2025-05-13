@@ -139,8 +139,19 @@ def download_genome(genome_info, output_dir):
                     print(f"Failed to download {pep_url}: {e}")
                     
                     
-                    
-                    
+#=== Output an XML object as a formatted tree for inspection ===#                    
+def explore(obj, indent=0):
+    spacing = "  " * indent
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            print(f"{spacing}{key}: {type(value)}")
+            explore(value, indent + 1)
+    elif isinstance(obj, list):
+        print(f"{spacing}List of length {len(obj)}")
+        if len(obj) > 0:
+            explore(obj[0], indent + 1)
+    else:
+        print(f"{spacing}{type(obj)} → {obj}")
                     
                     
                     

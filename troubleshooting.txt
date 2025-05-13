@@ -1,4 +1,4 @@
-## Major issue #1
+#=== Major issue #1 (Salmon installs) ===#
 installed salmon in conda env, has an issue finding a library called boost of the correct version
 - installing with -c conda forge did not fix
 - updating to ubuntu 20 from ubuntu 18 did not fix
@@ -19,7 +19,6 @@ cmake ..
 make -j$(nproc)
 -did not work
 
-
 trying to uninstall cmake version 4.0 and manually reinstall 3.5.2
 (required OpenGl: sudo apt install libgl1-mesa-dev)
 (also openssl libssl-dev)
@@ -27,7 +26,6 @@ trying to uninstall cmake version 4.0 and manually reinstall 3.5.2
 --error in libstadenio
 sudo apt install zlib1g-dev libcurl4-openssl-dev libssl-dev \
                  libbz2-dev build-essential git
-
 
 cd cmake-3.5.2
 wget https://github.com/Kitware/CMake/releases/download/v3.5.2/cmake-3.5.2.tar.gz
@@ -41,10 +39,39 @@ source ~/.bashrc
 cmake --version (to check correct version)
 - now try to build salmon again
 - did not work with version 3.5.2. installing 3.27 and try again
-
 - in the end, build did not work either. used precompiled binaries to make it work
+################################################################################################################################################
 
 
-#### cellranger
+#=== Get jupyter notebook running on WSL ===#
+- initiate the WSL instance and cd to your target directory
+- command: jupyter notebook --no-browser --ip=0.0.0.0
+- jupyter will initiate and give direction on a line to paste into a webbrowser in windows to access notebook
+- typically looks something like: 127.0.0.1:8888
+################################################################################################################################################
+
+#=== Get salmon running on WSL instance of ubuntu ===##
+- Tried building from source, too much trouble with version incompatibilities etc
+- Works installing in a conda env, but I want to be able to easily pipe command from jupyter notebook to the WSL shell
+- To solve, download the pre-compiled binary and add to PATH in the WSL shell
+- precompiled binaries located at: https://github.com/COMBINE-lab/salmon/releases
+- in shell, execute the following commands:
+cd programs/salmon
+wget https://github.com/COMBINE-lab/salmon/releases/download/v1.10.0/salmon-1.10.0_linux_x86_64.tar.gz
+tar -xvzf salmon-1.10.0_linux_x86_64.tar.gz
+cd salmon-latest_linux_x86_64/bin
+# get the directory to add
+pwd
+echo 'export PATH="$PATH:/home/jordan/programs/salmon/salmon-latest_linux_x86_64/bin"' >> ~/.bashrc
+source ~/.bashrc
+# verify the change
+echo $PATH
+# verify salmon
+salmon --version
+################################################################################################################################################
+
+#=== CellRanger ===#
 after install, cellranger sitecheck failed with "cpu does not support avx instruction." may need to enable on the virtual machine
+
+
 
