@@ -2,6 +2,7 @@
 import pipeline_utils
 import os
 import urllib.request
+import requests
 from datetime import datetime
 import sys
 from contextlib import redirect_stdout
@@ -154,6 +155,26 @@ def explore(obj, indent=0):
         print(f"{spacing}{type(obj)} → {obj}")
                     
                     
-                    
+#=== File download handler ===#
+def download_file(url, dest_path, verbose=True):
 
+    ## Log the function and params
+    if verbose:
+        print("Called download_file function")
+        print(f"Target url: {url}")
+        print(f"Destination filepath: {dest_path}")
+
+    ## Check if file exists
+    if os.path.exists(dest_path):
+        print("File already exists, exiting")
+    else
+        print("File not found, downloading")
+        response = requests.get(url, stream=True)
+        if response.status_code == 200:
+            with open(dest_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            print(f"Downloaded {dest_path}")
+        else:
+            print(f"Failed to download {url} - status code {response.status_code}")
 
