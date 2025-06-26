@@ -167,7 +167,7 @@ def download_file(url, dest_path, verbose=True):
     ## Check if file exists
     if os.path.exists(dest_path):
         print("File already exists, exiting")
-    else
+    else:
         print("File not found, downloading")
         response = requests.get(url, stream=True)
         if response.status_code == 200:
